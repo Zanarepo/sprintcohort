@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sprint Cohort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-1: #F8F9FA;
+    --bg-2: #E9ECEF;
+    --cream: #111827;
+    --gold: #4F46E5;
+    --muted: #4B5563;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; background: #E2E8F0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Fixed single-screen canvas — screenshot-ready */
+  .flyer {
+    width: 1080px; height: 1350px;
+    background-color: var(--bg-1);
+    background-image: 
+      radial-gradient(rgba(75, 85, 99, 0.15) 1px, transparent 1px),
+      radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.12), transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.12), transparent 50%),
+      radial-gradient(circle at 80% 10%, rgba(236, 72, 153, 0.08), transparent 40%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+    background-position: 0 0, 0 0, 0 0, 0 0;
+    color: var(--cream);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  
+  .brand {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  }
+
+  .weeks-badge {
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.25); 
+    border-radius: 999px;
+    padding: 10px 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .main-content {
+    margin-top: 60px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif; font-weight: 900; font-size: 80px;
+    line-height: 1.05; letter-spacing: -0.01em;
+    margin-bottom: 50px;
+  }
+  h1 .accent { color: var(--gold); font-style: italic; font-weight: 600; }
+
+  .content-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    flex-grow: 1;
+  }
+
+  .text-column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .info-group h3 {
+    font-size: 20px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  
+  .info-group p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .info-group ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .info-group ul li {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .info-group ul li::before {
+    content: "✓";
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .outline-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .step {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--cream);
+  }
+
+  .step span {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .image-column {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .featured-img {
+    width: 100%;
+    max-height: 650px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.3);
+    border: 6px solid #FFFFFF;
+  }
+
+  .bottom-area {
+    margin-top: 20px;
+  }
+
+  .divider {
+    height: 1px; width: 100%; 
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.1) 80%, transparent);
+    margin-bottom: 40px;
+  }
+
+  .bottom { display: flex; align-items: center; justify-content: space-between; }
+
+  .price-block .label {
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  }
+  .price-block .price {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 56px; color: var(--cream); line-height: 1;
+  }
+
+  .payment-info {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    border-left: 2px solid var(--gold);
+    padding-left: 24px;
+  }
+
+  .payment-info strong {
+    color: var(--cream);
+    font-size: 18px;
+  }
+
+  .cta {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 20px;
+    background: var(--gold); color: #FFFFFF;
+    padding: 22px 48px; border-radius: 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+  <div class="top">
+    <div class="brand">The Sprint School</div>
+    <div class="weeks-badge">Starts 20th August</div>
+  </div>
+
+  <div class="main-content">
+    <h1>Stop reading PM.<br>Start <span class="accent">shipping</span> it.</h1>
+    
+    <div class="content-split">
+      <div class="text-column">
+        <div class="info-group">
+          <h3>Who Is This For?</h3>
+          <p>Aspiring PMs, Junior PMs, and career-switchers moving into product. Covers both <b>technical</b> and <b>generic PM</b> tracks. Run real sprint ceremonies, write actual docs, and ship a product with a real team.</p>
+        </div>
+        
+        <div class="info-group">
+          <h3>What You Leave With</h3>
+          <ul>
+            <li>Live 8-week team sprints</li>
+            <li>1 real shipped product</li>
+            <li>End-to-end PM experience</li>
+            <li>Certificate of Completion</li>
+          </ul>
+        </div>
+        
+        <div class="info-group">
+          <h3>Course Outline</h3>
+          <div class="outline-steps">
+            <div class="step"><span>01</span> Product Strategy</div>
+            <div class="step"><span>02</span> Requirements & PRDs</div>
+            <div class="step"><span>03</span> Design Docs</div>
+            <div class="step"><span>04</span> Engineering & Release</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-column">
+        <!-- Incorporating the user's Flyer.png image -->
+        <img src="Flyer.png" class="featured-img" alt="The Sprint Cohort Flyer Image">
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-area">
+    <div class="divider"></div>
+    <div class="bottom">
+      <div class="price-block">
+        <div class="label">Tuition</div>
+        <div class="price">₦25,000</div>
+      </div>
+      <div class="payment-info">
+        <strong>Wema Bank: 0290089923</strong><br>
+        Prince Ekpenyong<br>
+        <span style="color: var(--gold);">WhatsApp: 09167690043</span>
+      </div>
+      <div class="cta">Apply Now</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
